@@ -5,7 +5,7 @@
 
 ### 出力フォーマット
 
-【通貨ペア】取引所A - 取引所B
-price : 価格A - 価格B
-volume : 取引量A - 取引量B
-rate : 倍率
+【通貨ペア】取引所A - 取引所B  
+price : 価格A - 価格B  
+volume : 取引量A - 取引量B  
+rate : 倍率  
