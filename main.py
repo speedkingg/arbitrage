@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from exchanges_util.trade_satoshi_utils import TRADE_SATOHI_UTILS
-from exchanges_util.coin_exchange_utils import COIN_EXCHANGE_UTILS
-from exchanges_util.price_comparison import PRICE_COMPARISON
+from exchanges_util.coin_exchange_utils import CoinExchangeUtils
+from exchanges_util.price_comparison import PriceComparison
+from exchanges_util.trade_satoshi_utils import TradeSatoshiUtils
 
 # 独自クラスインスタンス化
-trade_satoshi = TRADE_SATOHI_UTILS()
-coin_exchange = COIN_EXCHANGE_UTILS()
-price_comparison = PRICE_COMPARISON()
+trade_satoshi = TradeSatoshiUtils()
+coin_exchange = CoinExchangeUtils()
+price_comparison = PriceComparison()
 
 if __name__ == '__main__':
-
     # 価格情報を格納するlist
     price_list = []
 
@@ -23,7 +22,4 @@ if __name__ == '__main__':
     price_list.append(coin_exchange_json)
 
     # 指定した倍率以上の通貨ペアと取引所を表示-----------------------------
-    price_comparison.print_arbitrage_list(0.4,price_list)
-
-
-
+    price_comparison.print_arbitrage_list(0.4, price_list)
