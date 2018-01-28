@@ -3,13 +3,16 @@
 ## 概要
 各取引所の価格を比較し、一定のレート以上のペアを表示する
 
-### 出力フォーマット
+## 対応取引所
+- trade satoshi
+- coin exchange
 
-【通貨ペア】取引所A - 取引所B  
-rate : 倍率  
-price : 価格A - 価格B  
-volume : 取引量A - 取引量B  
-order_book [ price( quantity ) ] :  
-・price( quantity ) - price( quantity )  
-・price( quantity ) - price( quantity )  
-・price( quantity ) - price( quantity )  
+### 出力フォーマット
+>【通貨ペア】取引所A - 取引所B  
+>rate : 倍率  
+>price : 価格A - 価格B  
+>volume : 取引量A - 取引量B  
+>order_book [ price( quantity ) ] :  
+>・price( quantity ) - price( quantity )  
+>・price( quantity ) - price( quantity )  
+>・price( quantity ) - price( quantity )  
