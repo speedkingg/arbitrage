@@ -13,6 +13,6 @@
 >price : 価格A - 価格B  
 >volume : 取引量A - 取引量B  
 >order_book [ price( quantity ) ] :  
->・price( quantity ) - price( quantity )  
->・price( quantity ) - price( quantity )  
->・price( quantity ) - price( quantity )  
+>・板価格A( 板取引量A ) - 板価格B( 板取引量B )  
+>・板価格A( 板取引量A ) - 板価格B( 板取引量B )  
+>・板価格A( 板取引量A ) - 板価格B( 板取引量B )  
