@@ -1,0 +1,5 @@
+{
+  "output_limit_ratio" : 0.4,
+  "show_order_book_number": 4,
+  "minimum_volume": 0.001
+}

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import json
 from exchanges_util.coin_exchange_utils import CoinExchangeUtils
 from exchanges_util.price_comparison import PriceComparison
 from exchanges_util.trade_satoshi_utils import TradeSatoshiUtils
@@ -8,6 +9,11 @@ from exchanges_util.trade_satoshi_utils import TradeSatoshiUtils
 trade_satoshi = TradeSatoshiUtils()
 coin_exchange = CoinExchangeUtils()
 price_comparison = PriceComparison()
+
+# configファイル読み込み
+arbitrage_parameter_file = 'config/arbitrage_parameter.json'
+arbitrage_parameter = json.load(open(arbitrage_parameter_file, 'r'))
+RATIO = arbitrage_parameter['output_limit_ratio']
 
 if __name__ == '__main__':
     # 価格情報を格納するlist
@@ -22,4 +28,4 @@ if __name__ == '__main__':
     price_list.append(coin_exchange_json)
 
     # 指定した倍率以上の通貨ペアと取引所を表示-----------------------------
-    price_comparison.print_arbitrage_list(0.4, price_list)
+    price_comparison.print_arbitrage_list(RATIO, price_list)
