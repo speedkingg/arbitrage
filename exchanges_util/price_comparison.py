@@ -4,10 +4,12 @@ import json
 
 from exchanges_util.coin_exchange_utils import CoinExchangeUtils
 from exchanges_util.trade_satoshi_utils import TradeSatoshiUtils
+from exchanges_util.binance_utils import BinanceUtils
 
 # 独自クラスインスタンス化
 trade_satoshi = TradeSatoshiUtils()
 coin_exchange = CoinExchangeUtils()
+binance = BinanceUtils()
 
 # configファイル読み込み
 arbitrage_parameter_file = 'config/arbitrage_parameter.json'
@@ -82,9 +84,7 @@ class PriceComparison:
             if 1 + ratio > rate > 1 - ratio:
                 continue
 
-            # 通貨名が一致しない場合、除外する??
-            # print(satoshi_json[key]['coin_name'].lower())
-            # print(coin_exchange_json[key]['coin_name'].lower())
+            # 通貨名が一致しない場合、除外する
             if first_list[key]['coin_name'].lower().replace(' ', '') \
                     != second_list[key]['coin_name'].lower().replace(' ', ''):
                 continue
@@ -116,25 +116,13 @@ class PriceComparison:
                 second_order_book = self._get_order_book(key, second_trade_type, DEPTH, second_list['exchange_name'])
 
             # 結果を整理して出力
-            print("【" + key + "】"
-                  + first_list['exchange_name']
-                  + " - "
-                  + second_list['exchange_name']
-                  )
+            print("【" + key + "】" + first_list['exchange_name'] + " - " + second_list['exchange_name'])
 
             print("rate" + " : " + str(rate))
 
-            print("price" + " : "
-                  + str(first_list[key]['price'])
-                  + " - "
-                  + str(second_list[key]['price'])
-                  )
+            print("price" + " : " + str(first_list[key]['price']) + " - " + str(second_list[key]['price']))
 
-            print("volume" + " : "
-                  + str(first_list[key]['volume'])
-                  + " - "
-                  + str(second_list[key]['volume'])
-                  )
+            print("volume" + " : " + str(first_list[key]['volume']) + " - " + str(second_list[key]['volume']))
 
             print("order_book [ price( quantity ) ]" + " : ")
 
@@ -149,11 +137,9 @@ class PriceComparison:
             # 取得したオーダーを1件ずつ表示する
             for i in range(0, depth):
                 print("・"
-                      + str(first_order_book[i]['price'])
-                      + "( " + str(first_order_book[i]['quantity']) + " )"
+                      + str(first_order_book[i]['price']) + "( " + str(first_order_book[i]['quantity']) + " )"
                       + " - "
-                      + str(second_order_book[i]['price'])
-                      + "( " + str(second_order_book[i]['quantity']) + " )"
+                      + str(second_order_book[i]['price']) + "( " + str(second_order_book[i]['quantity']) + " )"
                       )
 
             print("")
@@ -165,3 +151,5 @@ class PriceComparison:
             return trade_satoshi.get_order_book(currency_pair, trade_type, depth)
         elif exchange_name == "coin_exchange":
             return coin_exchange.get_order_book(currency_pair, trade_type, depth)
+        elif exchange_name == "binance":
+            return binance.get_order_book(currency_pair, trade_type, depth)
