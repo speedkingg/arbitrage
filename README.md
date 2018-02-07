@@ -6,6 +6,7 @@
 ## 対応取引所
 - trade satoshi
 - coin exchange
+- Binance
 
 ### 出力フォーマット
 >【通貨ペア】取引所A - 取引所B  

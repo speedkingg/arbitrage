@@ -33,15 +33,26 @@ class TradeSatoshiUtils:
                 'volume': "%f" % record['volume']
             }
 
-        # 通貨full_name取得
-        trade_satoshi_get_currencies = requests.get(trade_satoshi_qpi_get_currencies).json()["result"]
-        for key in satoshi_json.keys():
-            for item in trade_satoshi_get_currencies:
-                if item['currency'] == key[0:len(item['currency'])]:
-                    satoshi_json[key]['coin_name'] = item['currencyLong']
-                    continue
+        # 通貨のfull name取得
+        satoshi_json = TradeSatoshiUtils.get_currency_full_name(satoshi_json)
 
         return satoshi_json
+
+    @staticmethod
+    def get_currency_full_name(response_store_json):
+        """
+        受け取ったjson内のデータを参照し通貨のfull_nameを取得する
+        :param: response_store_json
+                 <json> {exchange_name, currency_pair:{last_price,volume} * n}
+        :return: <json> {exchange_name, currency_pair:{last_price,volume,coin_name} * n}
+        """
+        trade_satoshi_get_currencies = requests.get(trade_satoshi_qpi_get_currencies).json()["result"]
+        for key in response_store_json.keys():
+            for item in trade_satoshi_get_currencies:
+                if item['currency'] == key[0:len(item['currency'])]:
+                    response_store_json[key]['coin_name'] = item['currencyLong']
+                    continue
+        return response_store_json
 
     @staticmethod
     def get_order_book(currency_pair, trade_type, depth):
@@ -52,7 +63,8 @@ class TradeSatoshiUtils:
         :param: depth <int> 所得オーダー数(n)
         :return: <list> {exchange_name, type:[{quantity, rate} * n}] }
         """
-        api_options = "?" + "market=" + str(currency_pair) \
+        api_options = "?" \
+                      + "market=" + str(currency_pair) \
                       + "&type=" + str(trade_type) \
                       + "&depth=" + str(depth)
 
