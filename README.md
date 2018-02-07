@@ -7,6 +7,7 @@
 - trade satoshi
 - coin exchange
 - Binance
+- Bittrex
 
 ### 出力フォーマット
 >【通貨ペア】取引所A - 取引所B  

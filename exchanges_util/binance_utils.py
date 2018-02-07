@@ -23,7 +23,7 @@ class BinanceUtils:
     @staticmethod
     def get_market_price():
         """
-        価格取得-----------------------
+        価格取得(getしたjsonを独自フォーマットに直す)
         :return: <json> {exchange_name, currency_pair:{last_price,volume,coin_name} * n}
         """
         binance_tickers = requests.get(binance_qpi_ticker).json()

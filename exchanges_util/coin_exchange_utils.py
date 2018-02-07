@@ -8,7 +8,7 @@ import requests
 # API URL
 coin_exchange_api_market_summaries = "https://www.coinexchange.io/api/v1/getmarketsummaries"
 coin_exchange_api_markets = "https://www.coinexchange.io/api/v1/getmarkets"
-coin_exchange_api_get_order_book = "https://www.coinexchange.io/api/v1/getorderbook"
+coin_exchange_api_order_book = "https://www.coinexchange.io/api/v1/getorderbook"
 
 
 class CoinExchangeUtils:
@@ -60,7 +60,7 @@ class CoinExchangeUtils:
         """
         api_options = "?" + "market_id=" + str(market_id)
 
-        order_book = requests.get(coin_exchange_api_get_order_book + api_options).json()["result"]
+        order_book = requests.get(coin_exchange_api_order_book + api_options).json()["result"]
 
         if trade_type == "sell":
             trade_type_key = "SellOrders"

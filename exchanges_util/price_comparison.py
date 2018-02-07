@@ -5,11 +5,13 @@ import json
 from exchanges_util.coin_exchange_utils import CoinExchangeUtils
 from exchanges_util.trade_satoshi_utils import TradeSatoshiUtils
 from exchanges_util.binance_utils import BinanceUtils
+from exchanges_util.bittrex_utils import BittrexUtils
 
 # 独自クラスインスタンス化
 trade_satoshi = TradeSatoshiUtils()
 coin_exchange = CoinExchangeUtils()
 binance = BinanceUtils()
+bittrex = BittrexUtils()
 
 # configファイル読み込み
 arbitrage_parameter_file = 'config/arbitrage_parameter.json'
@@ -153,3 +155,5 @@ class PriceComparison:
             return coin_exchange.get_order_book(currency_pair, trade_type, depth)
         elif exchange_name == "binance":
             return binance.get_order_book(currency_pair, trade_type, depth)
+        elif exchange_name == "bittrex":
+            return bittrex.get_order_book(currency_pair, trade_type, depth)
