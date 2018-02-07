@@ -7,8 +7,8 @@ import requests
 
 # API URL
 trade_satoshi_qpi_market_summaries = "https://tradesatoshi.com/api/public/getmarketsummaries"
-trade_satoshi_qpi_get_currencies = " https://tradesatoshi.com/api/public/getcurrencies"
-trade_satoshi_qpi_get_order_book = "https://tradesatoshi.com/api/public/getorderbook"
+trade_satoshi_qpi_currencies = " https://tradesatoshi.com/api/public/getcurrencies"
+trade_satoshi_qpi_order_book = "https://tradesatoshi.com/api/public/getorderbook"
 
 
 class TradeSatoshiUtils:
@@ -19,7 +19,7 @@ class TradeSatoshiUtils:
     @staticmethod
     def get_market_price():
         """
-        価格取得-----------------------
+        価格取得(getしたjsonを独自フォーマットに直す)
         :return: <json> {exchange_name, currency_pair:{last_price,volume,coin_name} * n}
         """
         trade_satoshi_market_summaries = requests.get(trade_satoshi_qpi_market_summaries).json()["result"]
@@ -46,7 +46,7 @@ class TradeSatoshiUtils:
                  <json> {exchange_name, currency_pair:{last_price,volume} * n}
         :return: <json> {exchange_name, currency_pair:{last_price,volume,coin_name} * n}
         """
-        trade_satoshi_get_currencies = requests.get(trade_satoshi_qpi_get_currencies).json()["result"]
+        trade_satoshi_get_currencies = requests.get(trade_satoshi_qpi_currencies).json()["result"]
         for key in response_store_json.keys():
             for item in trade_satoshi_get_currencies:
                 if item['currency'] == key[0:len(item['currency'])]:
@@ -68,7 +68,7 @@ class TradeSatoshiUtils:
                       + "&type=" + str(trade_type) \
                       + "&depth=" + str(depth)
 
-        order_book = requests.get(trade_satoshi_qpi_get_order_book + api_options).json()["result"]
+        order_book = requests.get(trade_satoshi_qpi_order_book + api_options).json()["result"]
 
         # getしたjsonを独自フォーマットに直す
         order_book_response = list()
