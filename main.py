@@ -2,7 +2,7 @@
 
 import json
 from exchanges_util.coin_exchange_utils import CoinExchangeUtils
-from exchanges_util.price_comparison import PriceComparison
+from utils.price_comparison import PriceComparison
 from exchanges_util.trade_satoshi_utils import TradeSatoshiUtils
 from exchanges_util.binance_utils import BinanceUtils
 from exchanges_util.bittrex_utils import BittrexUtils
