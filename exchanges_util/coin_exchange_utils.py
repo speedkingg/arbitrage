@@ -9,6 +9,7 @@ import requests
 coin_exchange_api_market_summaries = "https://www.coinexchange.io/api/v1/getmarketsummaries"
 coin_exchange_api_markets = "https://www.coinexchange.io/api/v1/getmarkets"
 coin_exchange_api_order_book = "https://www.coinexchange.io/api/v1/getorderbook"
+coin_exchange_api_currency = "https://www.coinexchange.io/api/v1/getcurrency"
 
 
 class CoinExchangeUtils:
@@ -83,3 +84,29 @@ class CoinExchangeUtils:
                 break
 
         return order_book_response
+
+    @staticmethod
+    def get_wallet_availability(currency_pair):
+        """
+        walletの状態を比較し「正常：True」か「異常：False」を返す
+        :param: currency_name <str> 通貨ペア(ex: ETC_BTC)
+        :return: <bool> True / False
+        """
+
+        # currency_pairから通貨名を抽出(ex:ETC_BTC → ETH)
+        separator_position_number = currency_pair.find("_")
+        market_currency_name = currency_pair[:separator_position_number]
+
+        api_options = "?" + "ticker_code=" + market_currency_name
+
+        currency_info = requests.get(coin_exchange_api_currency + api_options).json()['result']
+
+        wallet_status = currency_info['WalletStatus']
+
+        if wallet_status == 'online':
+            return True
+        elif wallet_status == 'offline':
+            return False
+        else:
+            raise Exception('unexpected value.-> coin exchange wallet status')
+
