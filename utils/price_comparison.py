@@ -81,12 +81,12 @@ class PriceComparison:
                     float(second_list[key]['price']) == 0:
                 continue
 
-            # 低レートを除外する
+            # 低レートをスキップする
             rate = float(first_list[key]['price']) / float(second_list[key]['price'])
             if 1 + ratio > rate > 1 - ratio:
                 continue
 
-            # 通貨名が一致しない場合、除外する
+            # 通貨名が一致しない場合、スキップする
             if first_list[key]['coin_name'].lower().replace(' ', '') \
                     != second_list[key]['coin_name'].lower().replace(' ', ''):
                 continue
@@ -99,7 +99,8 @@ class PriceComparison:
                 first_trade_type = "sell"
                 second_trade_type = "buy"
 
-            # coin_exchangeはwalletがよく閉まってるので、wallet_statusがofflineの場合、除外する
+            # coin_exchangeはwalletがよく閉まってるので、
+            # wallet_statusがofflineの場合、スキップする
             if first_list['exchange_name'] == 'coin_exchange' and \
                     rate > 1 and coin_exchange.get_wallet_availability(key) is False:
                 continue
@@ -154,14 +155,24 @@ class PriceComparison:
 
             print("")
 
-    # 取引所を判定してオーダー一覧を返す
     @staticmethod
     def _get_order_book(currency_pair, trade_type, depth, exchange_name):
+        """
+        取引所を判定してオーダー一覧を返す
+        :param:  currency_pair <str> オーダー一覧を取得する通貨ペア
+        :param:  trade_type <str> オーダー一覧を取得する種別(sell/buy)
+        :param:  depth <int> オーダー一覧を取得する個数
+        :param:  exchange_name <str> オーダー一覧を取得する取引所名
+        :return: <list> {exchange_name, type:[{quantity, rate} * n}] }
+        """
         if exchange_name == "trade_satoshi":
             return trade_satoshi.get_order_book(currency_pair, trade_type, depth)
+
         elif exchange_name == "coin_exchange":
             return coin_exchange.get_order_book(currency_pair, trade_type, depth)
+
         elif exchange_name == "binance":
             return binance.get_order_book(currency_pair, trade_type, depth)
+
         elif exchange_name == "bittrex":
             return bittrex.get_order_book(currency_pair, trade_type, depth)
