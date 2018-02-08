@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 
 import json
-from exchanges_util.coin_exchange_utils import CoinExchangeUtils
 from utils.price_comparison import PriceComparison
+from exchanges_util.coin_exchange_utils import CoinExchangeUtils
 from exchanges_util.trade_satoshi_utils import TradeSatoshiUtils
 from exchanges_util.binance_utils import BinanceUtils
 from exchanges_util.bittrex_utils import BittrexUtils
 
 # 独自クラスインスタンス化
+price_comparison = PriceComparison()
 trade_satoshi = TradeSatoshiUtils()
 coin_exchange = CoinExchangeUtils()
-price_comparison = PriceComparison()
 binance = BinanceUtils()
 bittrex = BittrexUtils()
 
