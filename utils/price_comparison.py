@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import json
-
 from exchanges_util.coin_exchange_utils import CoinExchangeUtils
 from exchanges_util.trade_satoshi_utils import TradeSatoshiUtils
 from exchanges_util.binance_utils import BinanceUtils
