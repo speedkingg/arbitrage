@@ -161,7 +161,7 @@ class PriceComparison:
         取引所を判定してオーダー一覧を返す
         :param:  currency_pair <str> オーダー一覧を取得する通貨ペア
         :param:  trade_type <str> オーダー一覧を取得する種別(sell/buy)
-        :param:  depth <str> オーダー一覧を取得する個数
+        :param:  depth <int> オーダー一覧を取得する個数
         :param:  exchange_name <str> オーダー一覧を取得する取引所名
         :return: <list> {exchange_name, type:[{quantity, rate} * n}] }
         """
