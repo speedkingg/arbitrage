@@ -77,8 +77,8 @@ class BittrexUtils:
         depth_count = 0
         for record in order_book:
             order_book_response_record = dict()
-            order_book_response_record['price'] = "%f" % float(record['Quantity'])  # 0番目がprice
-            order_book_response_record['quantity'] = "%f" % float(record['Rate'])  # 1番目がamount
+            order_book_response_record['price'] = "%f" % float(record['Rate'])
+            order_book_response_record['quantity'] = "%f" % float(record['Quantity'])
             order_book_response.append(order_book_response_record)
 
             depth_count += 1
