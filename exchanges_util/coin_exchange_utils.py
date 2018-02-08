@@ -86,7 +86,7 @@ class CoinExchangeUtils:
         return order_book_response
 
     @staticmethod
-    def get_wallet_status(currency_pair):
+    def get_wallet_availability(currency_pair):
         """
         walletの状態を比較し「正常：True」か「異常：False」を返す
         :param: currency_name <str> 通貨ペア(ex: ETC_BTC)

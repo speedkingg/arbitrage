@@ -101,10 +101,10 @@ class PriceComparison:
 
             # coin_exchangeはwalletがよく閉まってるので、wallet_statusがofflineの場合、除外する
             if first_list['exchange_name'] == 'coin_exchange' and \
-                    rate > 1 and coin_exchange.get_wallet_status(key) is False:
+                    rate > 1 and coin_exchange.get_wallet_availability(key) is False:
                 continue
             elif second_list['exchange_name'] == 'coin_exchange' and \
-                    rate < 1 and coin_exchange.get_wallet_status(key) is False:
+                    rate < 1 and coin_exchange.get_wallet_availability(key) is False:
                 continue
 
             # <例外処理>
